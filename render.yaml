@@ -1,0 +1,44 @@
+# Render Blueprint: New + > Blueprint, pick this repo. Fill the secret values in the dashboard.
+services:
+  - type: web
+    name: ops-copilot
+    runtime: node
+    plan: starter            # a persistent disk needs a paid plan; on the free plan data resets on every restart
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk:
+      name: copilot-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATA_FILE
+        value: /var/data/db.json
+      - key: COMPANY_NAME
+        value: Zenith Labs
+      - key: DELIVERY_EMAIL
+        sync: false
+      - key: TEAM_LEAD_NAME
+        sync: false
+      - key: TEAM_LEAD_EMAIL
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+      - key: IMAP_HOST
+        sync: false
+      - key: IMAP_USER
+        sync: false
+      - key: IMAP_PASS
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
